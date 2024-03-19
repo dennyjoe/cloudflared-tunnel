@@ -1,0 +1,18 @@
+version: "3.6"
+
+networks:
+  gateway:
+    external: true
+    name: "gateway"
+
+services:
+  cloudflared-tunnel:
+    container_name: "cloudflared-tunnel"
+    image: "cloudflare/cloudflared:latest"
+    command: "tunnel run nextcloud"
+    environment:
+      - "TUNNEL_TOKEN=$TUNNEL_TOKEN"
+      - "TUNNEL_POST_QUANTUM=true"
+    networks:
+      - "gateway"
+    restart: "unless-stopped"  
