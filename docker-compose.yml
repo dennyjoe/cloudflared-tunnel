@@ -1,5 +1,10 @@
 version: "3.6"
 
+networks:
+  gateway:
+    external: true
+    name: "gateway"
+
 services:
   cloudflared-tunnel:
     container_name: "cloudflared-tunnel"
@@ -8,4 +13,6 @@ services:
     environment:
       - "TUNNEL_TOKEN=$TUNNEL_TOKEN"
       - "TUNNEL_POST_QUANTUM=true"
-    restart: "unless-stopped"  
+    networks:
+      - "gateway"
+    restart: "unless-stopped"
