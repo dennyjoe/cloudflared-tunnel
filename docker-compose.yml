@@ -4,6 +4,9 @@ networks:
   gateway:
     external: true
     name: "gateway"
+  cloudflare_tunnel:
+    external: true
+    name: "cloudflare_tunnel"
 
 services:
   cloudflared-tunnel:
@@ -15,4 +18,5 @@ services:
       - "TUNNEL_POST_QUANTUM=true"
     networks:
       - "gateway"
+      - "cloudflare_tunnel"
     restart: "unless-stopped"
